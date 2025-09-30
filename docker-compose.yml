@@ -1,0 +1,27 @@
+﻿version:  3.8
+services:
+  llm-adapter:
+    build: ./llm-adapter
+    volumes:
+      - ./prompts:/app/prompts:ro
+      - ./scenarios:/app/scenarios
+      - ./logs:/app/logs
+      - ./models:/opt/llm/models
+    ports:
+      - 127.0.0.1:8000:8000
+    environment:
+      - LLM_BIN=/opt/llm/bin/llm_runtime
+      - SCENARIO_DIR=/app/scenarios
+      - LOG_DIR=/app/logs
+      - OLLAMA_URL=http://ollama:11434
+      - OLLAMA_MODEL=llama3
+    depends_on:
+      - ollama
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: warroom-ollama
+    ports:
+      - 127.0.0.1:11434:11434
+    volumes:
+      - ./models:/root/.ollama/models
