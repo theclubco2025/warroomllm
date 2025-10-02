@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿version:  3.8
 services:
   llm-adapter:
@@ -9,12 +10,45 @@ services:
       - ./models:/opt/llm/models
     ports:
       - 127.0.0.1:8000:8000
+=======
+﻿version: "3.8"
+services:
+  llm-adapter:
+    build: ./llm-adapter
+    env_file:
+      - ./.env
+    volumes:
+      - ./prompts:/app/prompts:ro
+      - type: tmpfs
+        target: /app/scenarios
+      - type: tmpfs
+        target: /app/logs
+      - ./models:/opt/llm/models
+    ports:
+      - 127.0.0.1:8001:8000
+>>>>>>> 1de50e5 (chore: constraints)
     environment:
       - LLM_BIN=/opt/llm/bin/llm_runtime
       - SCENARIO_DIR=/app/scenarios
       - LOG_DIR=/app/logs
+<<<<<<< HEAD
       - OLLAMA_URL=http://ollama:11434
       - OLLAMA_MODEL=llama3
+=======
+      - OLLAMA_URL=http://host.docker.internal:11434
+      - OLLAMA_MODEL=llama3
+      - OLLAMA_NUM_PREDICT=1536
+      - OLLAMA_NUM_CTX=6144
+      - OLLAMA_TEMPERATURE=0.1
+      - PRIVACY_MODE=true
+      - ALLOW_ORIGINS=http://localhost:8001
+      - API_SECRET=
+      - BROWSER_API_KEY=local-browser-key
+      - DISABLE_RESPONSES_PERSISTENCE=true
+      - DISABLE_REFUSAL_LOGS=true
+      - DISABLE_ACTIVITY_LOG=true
+      - EPHEMERAL_SCENARIOS=true
+>>>>>>> 1de50e5 (chore: constraints)
     depends_on:
       - ollama
 

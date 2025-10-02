@@ -1,6 +1,17 @@
+<<<<<<< HEAD
 ﻿logs/
 scenarios/
 models/
 __pycache__/
 *.pyc
 .env
+=======
+﻿.env
+logs/
+scenarios/
+node_modules/
+*.log
+__pycache__/
+.DS_Store
+
+>>>>>>> 1de50e5 (chore: constraints)
